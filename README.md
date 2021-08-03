@@ -1,68 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository serves as a reproduction for an issue I ran into involving the ios/safari 15 beta (currently version 4), styled-components, and Shadow DOM. 
 
-## Available Scripts
+The app involves a div and a button, both rendered in a shadow root and using styled-components. The div is red and has fixed positioning towards the bottom right hand corner of the app. The button applies a random `transform: translateY` offset between -1 and -100 to the div. Whenever everything is working, it looks like this (taken on desktop Chrome):
 
-In the project directory, you can run:
+https://user-images.githubusercontent.com/5084492/128089740-9921d8a2-3e36-43b8-bad1-10ac95b76567.mov
 
-### `yarn start`
+It behaves correctly like this almost everywhere. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+On an iphone with the ios 15 version 4 beta, however, it does not. Upon clicking the button, a new class name is generated due to the different offset. However, the associated styles never get attached to the element as show in the video below of the dev tools. The div simply disappears because all styles are lost.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+https://user-images.githubusercontent.com/5084492/128090352-0cbfb5cc-a0b0-4853-ba6a-30e70ce56581.mp4
 
-### `yarn test`
+https://user-images.githubusercontent.com/5084492/128090375-154e3cf7-f73f-4b04-ad30-62fef01807e9.mov
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Couple of details:
 
-### `yarn build`
+- This only happens if styled-components is using the speedy mode (is on by default in production) that injects styles directly into the CSS OM. Hence, REACT_APP_SC_DISABLE_SPEEDY=false is set in the .env file of this repository so it can be replicated in development mode. If REACT_APP_SC_DISABLE_SPEEDY is set to true and the styles are added to a styled tag in the DOM as opposed to the CSS OM, everything functions normally.
+- This only happens when rendering into the shadow DOM. An additional environment variable REACT_APP_RENDER_IN_SHADOW_DOM is set to true in the .env file of this repository. If it is set to false, everything functions normally.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the Project
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- yarn install
+- yarn start
