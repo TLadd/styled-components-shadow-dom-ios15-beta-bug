@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/styled-components-shadow-dom-ios15-beta-bug/static/js/main.7143dafe.chunk.js",
+    "main.js.map": "/styled-components-shadow-dom-ios15-beta-bug/static/js/main.7143dafe.chunk.js.map",
+    "runtime-main.js": "/styled-components-shadow-dom-ios15-beta-bug/static/js/runtime-main.6727a222.js",
+    "runtime-main.js.map": "/styled-components-shadow-dom-ios15-beta-bug/static/js/runtime-main.6727a222.js.map",
+    "static/js/2.9aeafbca.chunk.js": "/styled-components-shadow-dom-ios15-beta-bug/static/js/2.9aeafbca.chunk.js",
+    "static/js/2.9aeafbca.chunk.js.map": "/styled-components-shadow-dom-ios15-beta-bug/static/js/2.9aeafbca.chunk.js.map",
+    "index.html": "/styled-components-shadow-dom-ios15-beta-bug/index.html",
+    "static/js/2.9aeafbca.chunk.js.LICENSE.txt": "/styled-components-shadow-dom-ios15-beta-bug/static/js/2.9aeafbca.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6727a222.js",
+    "static/js/2.9aeafbca.chunk.js",
+    "static/js/main.7143dafe.chunk.js"
+  ]
+}
